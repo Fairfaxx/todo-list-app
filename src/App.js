@@ -43,10 +43,10 @@ function App() {
         <div className="col-10 col-md-8 mx-auto mt-5">
           <h3 className='text-capitalize text-center'>Todo Input</h3>
           <TodoInput
-            item={setItem}
+            item={item}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
-            editItem={setEditItem}
+            editItem={editItem}
           />
           <TodoList
             items={setItems}
