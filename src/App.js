@@ -4,25 +4,31 @@ import TodoList from './components/TodoList';
 import { v4 as uuidv4 } from 'uuid';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TodoItem from './components/TodoItem';
-//bla
-function App() {
-  const initialValues = [
-    { id: 1, title: "Wake Up" },
-    { id: 2, title: "Make Breakfast" }
-  ];
 
-  const [items, setItems] = useState(initialValues);
+function App() {
+
+  const [items, setItems] = useState([]);
   const [item, setItem] = useState('');
   const [editItem, setEditItem] = useState(false);
   const [id, setId] = useState(uuidv4());
 
   const handleChange = (e) => {
-    console.log('handle change')
+    setItem(e.target.value)
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('handle submit');
+    const newItem = {
+      id: uuidv4(),
+      title: item
+    }
+    const updatedItem = [
+      ...items,
+      newItem
+    ]
+    setItems(updatedItem);
+    setEditItem(false);
+    setItem('');
   };
 
   const clearList = () => {
@@ -36,7 +42,7 @@ function App() {
   const handleEdit = (id) => {
     console.log(`handle edit ${id}`);
   }
-
+  console.log(items);
   return (
     <div className='container'>
       <div className="row">
@@ -49,7 +55,7 @@ function App() {
             editItem={editItem}
           />
           <TodoList
-            items={setItems}
+            items={items}
             clearList={clearList}
             handleDelete={handleDelete}
             handleEdit={handleEdit}
